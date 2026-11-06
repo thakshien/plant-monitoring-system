@@ -1,52 +1,96 @@
-Plant Monitoring System
+# Plant Monitoring System 🌱
 
-An IoT-based plant monitoring prototype built around an ESP8266 NodeMCU. It monitors soil moisture, temperature, humidity and light status, then serves a live dashboard over the local Wi-Fi network.
+An IoT-based plant monitoring system built using ESP8266 NodeMCU. The system monitors soil moisture, temperature, humidity and light intensity, displaying the readings on a live web dashboard.
 
-Hardware
+## Project Details
 
-• ESP8266 NodeMCU
-• Soil moisture sensor (analog output)
-• DHT11 or DHT22 temperature/humidity sensor
-• LDR module with digital comparator output
-• Breadboard and jumper wires
-• USB power supply
+- Course: 21CSE305P – SerBot: Project-Based Learning in Robotics
+- Project: Plant Monitoring System
+- Contributors: Ardhiyaksh and A.V.S. Thakshien
+- Guide: Dr. R. Kayalvizhi
 
-Wiring
+## Hardware Requirements
 
-|NodeMCU pin|Sensor connection                     |
-|-----------|--------------------------------------|
-|A0         |Soil moisture sensor AOUT             |
-|D4 (GPIO2) |DHT data                              |
-|D1 (GPIO5) |LDR digital output (optional)         |
-|3V3        |Sensor VCC, if supported by the module|
-|GND        |Common ground                         |
+- ESP8266 NodeMCU
+- Soil Moisture Sensor
+- DHT11 / DHT22 Temperature and Humidity Sensor
+- LDR Sensor Module
+- Breadboard
+- Jumper Wires
+- USB Power Supply
 
-Analog-input note: The NodeMCU ESP8266 exposes one analog input (A0). The soil sensor and an analog LDR output cannot both be connected directly to A0 at once. This code reads soil moisture on A0 and uses the LDR module’s digital comparator output on D1. Adjust the LDR module’s threshold potentiometer. If you have an analog-only LDR, add an analog multiplexer or external ADC and adapt the code.
+## Software Requirements
 
-Check the voltage range of your particular NodeMCU board and sensor modules before wiring. Do not apply a voltage above the board’s A0 input limit.
+- Arduino IDE
+- ESP8266 Board Package
+- ESP8266WiFi Library
+- ESP8266WebServer Library
+- DHT Sensor Library
+- HTML, CSS and JavaScript
 
-Software setup
+## Pin Connections
+
+| Component | NodeMCU Pin |
+|---|---|
+| Soil Moisture Sensor | A0 |
+| DHT Sensor | D4 |
+| LDR Digital Output | D1 |
+| VCC | 3.3V (if supported) |
+| GND | GND |
+
+**Note:** ESP8266 NodeMCU has only one analog input (A0). This implementation connects the soil moisture sensor to A0 and uses the LDR module's digital comparator output on D1.
+
+## Features
+
+- Real-time soil moisture monitoring
+- Temperature monitoring
+- Humidity monitoring
+- Light status detection
+- Web-based monitoring dashboard
+- Automatic sensor data updates
+- Low soil moisture alert
+- Wi-Fi connectivity
+
+## How It Works
+
+1. Sensors collect environmental data.
+2. ESP8266 processes the sensor readings.
+3. The ESP8266 connects to a Wi-Fi network.
+4. A local web server hosts the dashboard.
+5. The dashboard retrieves sensor readings through a JSON endpoint.
+6. Users can monitor plant conditions through a browser.
+
+## Installation
 
 1. Install Arduino IDE.
 2. Install the ESP8266 board package.
-3. Select NodeMCU 1.0 (ESP-12E Module).
-4. Install DHT sensor library and Adafruit Unified Sensor from Library Manager.
-5. Open Arduino/plant_monitor.ino.
-6. Enter your Wi-Fi name and password in WIFI_SSID and WIFI_PASSWORD.
-7. Select the correct COM/serial port and upload.
-8. Open Serial Monitor at 115200 baud. Visit the IP address printed after Wi-Fi connects.
+3. Install the DHT Sensor Library and Adafruit Unified Sensor.
+4. Open `Arduino/plant_monitor.ino`.
+5. Enter your Wi-Fi SSID and password.
+6. Upload the code to the NodeMCU.
+7. Open Serial Monitor at 115200 baud.
+8. Visit the IP address displayed in Serial Monitor.
 
-Dashboard endpoints
+## Dashboard Endpoints
 
-• / — dashboard page
-• /data — JSON sensor readings
+- `/` – Web dashboard
+- `/data` – JSON sensor data
 
-The dashboard polls /data every four seconds. Firmware sensor readings are refreshed every two seconds. The low-moisture alert threshold is set to 30%.
+The dashboard refreshes every 4 seconds.
 
-Calibration
+## Soil Moisture Alert
 
-Set SOIL_DRY and SOIL_WET using readings from your own probe. The supplied values (780 and 320) are example calibration values from the project report and may need adjustment. Verify whether your probe’s ADC reading decreases as it gets wetter; if not, adjust the mapping accordingly.
+The system displays a watering alert when soil moisture falls below 30%.
 
-Project scope
+## Future Enhancements
 
-This is a monitoring system. It displays a watering alert but does not automatically operate a pump. Automatic irrigation, cloud notifications, historical logging, multiple plant nodes and predictive watering are possible future enhancements.
+- Automatic irrigation system
+- Mobile application integration
+- Cloud-based monitoring
+- Historical sensor data storage
+- Multiple plant monitoring
+
+## Project Contributors
+
+- Ardhiyaksh
+- A.V.S. Thakshien
